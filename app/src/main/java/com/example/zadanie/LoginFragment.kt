@@ -19,7 +19,7 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
             val input1: String = view.findViewById<EditText>(R.id.editText1).text.toString()
             val input2: String = view.findViewById<EditText>(R.id.editText2).text.toString()
             Log.d("inputs", "$input1, $input2")
-
+            it.findNavController().navigate(R.id.menuToFeed)
             // Spracovanie dát alebo iné akcie
         }
 

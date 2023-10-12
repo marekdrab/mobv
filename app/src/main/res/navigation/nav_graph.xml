@@ -10,9 +10,14 @@
 
         <action
             android:id="@+id/loginToRegister"
-            app:destination="@id/secondFragment" />
+            app:destination="@id/registerFragment" />
+
+        <action
+            android:id="@+id/menuToFeed"
+            app:destination="@id/feedFragment" />
     </fragment>
 
-    <fragment android:id="@+id/secondFragment" android:name="com.example.zadanie.RegisterFragment" />
+    <fragment android:id="@+id/registerFragment" android:name="com.example.zadanie.RegisterFragment" />
+    <fragment android:id="@+id/feedFragment" android:name="com.example.zadanie.FeedFragment" />
 
 </navigation>
