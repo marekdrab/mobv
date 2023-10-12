@@ -5,9 +5,8 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 
-class MapFragment: Fragment(R.layout.fragment_profile) {
+class MapFragment: Fragment(R.layout.fragment_map) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("test", "test")
     }
 }

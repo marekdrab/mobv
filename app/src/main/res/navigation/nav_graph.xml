@@ -40,5 +40,26 @@
         android:name="com.example.zadanie.FeedFragment"
         android:label="FeedFragment" />
 
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.zadanie.ProfileFragment"
+        android:label="FeedFragment" />
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.zadanie.MapFragment"
+        android:label="FeedFragment" />
+
+    <action
+        android:id="@+id/action_to_feed"
+        app:destination="@id/feedFragment" />
+
+    <action
+        android:id="@+id/action_to_map"
+        app:destination="@id/mapFragment" />
+
+    <action
+        android:id="@+id/action_to_profile"
+        app:destination="@id/profileFragment" />
 
 </navigation>
