@@ -3,4 +3,6 @@
     <string name="title_login">Prihlasenie</string>
     <string name="title_intro">Intro</string>
     <string name="title_signup">Registracia</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoibWFyZWtkcmFiIiwiYSI6ImNsbm12aDVnODAwNWUya21ueGxheGg3NzAifQ.MOWq4WAzjcIzlHx_98g_sA</string>
+
 </resources>
