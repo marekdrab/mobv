@@ -1,23 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@+id/firstFragment">
+    app:startDestination="@+id/introFragment">
 
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.example.zadanie.LoginFragment">
-
-
-        <action
-            android:id="@+id/loginToRegister"
-            app:destination="@id/registerFragment" />
+        android:id="@+id/introFragment"
+        android:name="com.example.zadanie.IntroFragment"
+        android:label="IntroFragment">
 
         <action
-            android:id="@+id/menuToFeed"
+            android:id="@+id/action_intro_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_intro_signup"
+            app:destination="@id/signupFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.zadanie.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_login_feed"
             app:destination="@id/feedFragment" />
     </fragment>
 
-    <fragment android:id="@+id/registerFragment" android:name="com.example.zadanie.RegisterFragment" />
-    <fragment android:id="@+id/feedFragment" android:name="com.example.zadanie.FeedFragment" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.zadanie.SignupFragment"
+        android:label="SignupFragment">
+        <action
+            android:id="@+id/action_signup_feed"
+            app:destination="@id/feedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.example.zadanie.FeedFragment"
+        android:label="FeedFragment" />
+
 
 </navigation>

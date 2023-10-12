@@ -1,32 +1,28 @@
 package com.example.zadanie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 
-class LoginFragment: Fragment(R.layout.fragment_login) {
+class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Kód z Activity
-        val submitButton: Button = view.findViewById(R.id.submitButton)
-        submitButton.setOnClickListener {
-            // Logika po kliknutí na tlačidlo, napríklad na získanie textu z EditText
-            val input1: String = view.findViewById<EditText>(R.id.editText1).text.toString()
-            val input2: String = view.findViewById<EditText>(R.id.editText2).text.toString()
-            Log.d("inputs", "$input1, $input2")
-            it.findNavController().navigate(R.id.menuToFeed)
-            // Spracovanie dát alebo iné akcie
+        view.findViewById<Button>(R.id.submit_button).apply {
+            setOnClickListener {
+                val username: String =
+                    view.findViewById<EditText>(R.id.edit_text_username).text.toString()
+                val password: String =
+                    view.findViewById<EditText>(R.id.edit_text_password).text.toString()
+                login(username, password)
+            }
         }
 
-        val registerButton: Button = view.findViewById(R.id.registerButton)
-        registerButton.setOnClickListener {
-            it.findNavController().navigate(R.id.loginToRegister)
-        }
+    }
 
+    private fun login(username: String, password: String) {
+        findNavController().navigate(R.id.action_login_feed)
     }
 }

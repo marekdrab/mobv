@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">zadanie</string>
+    <string name="app_name">MOBV Zadanie</string>
+    <string name="title_login">Prihlasenie</string>
+    <string name="title_intro">Intro</string>
+    <string name="title_signup">Registracia</string>
 </resources>
