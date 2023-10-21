@@ -4,5 +4,17 @@
     <string name="title_intro">Intro</string>
     <string name="title_signup">Registracia</string>
     <string name="mapbox_access_token">sk.eyJ1IjoibWFyZWtkcmFiIiwiYSI6ImNsbm12aDVnODAwNWUya21ueGxheGg3NzAifQ.MOWq4WAzjcIzlHx_98g_sA</string>
-
+    <string name="forgotten_pw">Zabudnuté heslo</string>
+    <string name="email">Email:</string>
+    <string name="input_email">Zadajte email</string>
+    <string name="send">Odoslat</string>
+    <string name="pw">Heslo</string>
+    <string name="repeat_pw">Opakujte heslo</string>
+    <string name="insert_pw">Zadajte heslo</string>
+    <string name="insert_code">Zadajte kod</string>
+    <string name="code">Kod</string>
+    <string name="change_pw">Zmena hesla</string>
+    <string name="old_pw">Stare heslo</string>
+    <string name="new_pw">Nove heslo</string>
+    <string name="submit">Potvrdit</string>
 </resources>

@@ -43,12 +43,38 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.zadanie.ProfileFragment"
-        android:label="FeedFragment" />
+        android:label="ProfileFragment">
 
+        <action
+            android:id="@+id/action_change_pw"
+            app:destination="@id/changePasswordFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.zadanie.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.zadanie.MapFragment"
-        android:label="FeedFragment" />
+        android:label="MapFragment" />
+
+    <fragment
+        android:id="@+id/forgottenPasswordFragment"
+        android:name="com.example.zadanie.ForgottenPasswordFragment"
+        android:label="ForgottenPasswordFragment" />
+
+    <fragment
+        android:id="@+id/forgottenPasswordResetFragment"
+        android:name="com.example.zadanie.ForgottenPasswordResetFragment"
+        android:label="ForgottenPasswordResetFragment">
+
+        <action
+            android:id="@+id/action_pw_reset_to_login"
+            app:destination="@id/loginFragment" />
+
+    </fragment>
 
     <action
         android:id="@+id/action_to_feed"
@@ -61,5 +87,13 @@
     <action
         android:id="@+id/action_to_profile"
         app:destination="@id/profileFragment" />
+
+    <action
+        android:id="@+id/action_to_forgotten_pw"
+        app:destination="@id/forgottenPasswordFragment" />
+
+    <action
+        android:id="@+id/action_to_pw_reset"
+        app:destination="@id/forgottenPasswordResetFragment" />
 
 </navigation>
