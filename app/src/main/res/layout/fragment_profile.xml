@@ -7,27 +7,118 @@
     android:layout_marginBottom="12dp"
     tools:context=".IntroFragment">
 
+
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="143dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="24dp"
+        android:padding="13dp"
+        android:src="@drawable/baseline_profile"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <!--        app:layout_constraintStart_toEndOf="@+id/insertTimeButton"--><![CDATA[
+        app:layout_constraintTop_toBottomOf="@+id/switchButton"
+        app:layout_constraintVertical_bias="0.155" />
+
+
+
+
+
+
+
+
+
+
+
+    ]]>
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/name"
+        android:layout_width="170dp"
+        android:layout_height="35dp"
+        android:text="Meno"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="170dp"
+        android:layout_height="35dp"
+        android:text="Email"
+        app:layout_constraintBottom_toTopOf="@+id/forgotten_pw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintVertical_bias="0.257" />
+
+    <Switch
+        android:id="@+id/switchButton"
+        android:layout_width="134dp"
+        android:layout_height="43dp"
+        android:layout_centerInParent="true"
+        android:checked="false"
+        android:text="Merat okruh"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <EditText
+        android:id="@+id/timeInput"
+        android:layout_width="171dp"
+        android:layout_height="58dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="164dp"
+        android:hint="(HH:mm:ss)"
+        android:inputType="text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/mapView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchButton"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/insertTimeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_below="@id/timeInput"
+        android:layout_centerHorizontal="true"
+        android:text="Insert Time"
+        app:layout_constraintBottom_toTopOf="@+id/mapView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toEndOf="@+id/timeInput"
+        app:layout_constraintTop_toBottomOf="@+id/switchButton"
+        app:layout_constraintVertical_bias="0.122" />
 
     <Button
         android:id="@+id/forgotten_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/change_pw"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/switchButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintVertical_bias="0.898" />
+
+    <com.mapbox.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar" />
 
     <com.example.zadanie.BottomBar
         android:id="@+id/bottom_bar"
