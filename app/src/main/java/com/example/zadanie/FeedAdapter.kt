@@ -5,9 +5,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import eu.mcomputing.mobv.mobvzadanie.ItemDiffCallback
 
-data class MyItem(val imageResource: Int, val text: String)
+data class MyItem(val id: Int, val imageResource: Int, val text: String) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as MyItem
+
+        if (id != other.id) return false
+        if (imageResource != other.imageResource) return false
+        if (text != other.text) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + imageResource
+        result = 31 * result + text.hashCode()
+        return result
+    }
+}
 
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
     private var items: List<MyItem> = listOf()
@@ -33,8 +55,11 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
     override fun getItemCount() = items.size
 
     fun updateItems(newItems: List<MyItem>) {
+        val diffCallback = ItemDiffCallback(items, newItems)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         items = newItems
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
 }
