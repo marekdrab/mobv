@@ -3,6 +3,7 @@ package com.example.zadanie
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,17 +28,13 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
         // Pozorovanie zmeny hodnoty
         viewModel.feed_items.observe(viewLifecycleOwner) { items ->
-            // Tu môžete aktualizovať UI podľa hodnoty stringValue
+            Log.d("FeedFragment", "nove hodnoty $items")
             feedAdapter.updateItems(items)
         }
 
-        viewModel.updateItems(
-            listOf(
-                MyItem(0, R.drawable.baseline_feed, "Prvy"),
-                MyItem(1, R.drawable.baseline_map, "Druhy"),
-                MyItem(2, R.drawable.baseline_profile, "Treti"),
-            )
-        )
+        view.findViewById<Button>(R.id.btn_generate).setOnClickListener {
+            viewModel.updateItems()
+        }
 
     }
 }
