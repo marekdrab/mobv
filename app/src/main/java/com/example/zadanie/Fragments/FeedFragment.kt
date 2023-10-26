@@ -1,14 +1,17 @@
-package com.example.zadanie
+package com.example.zadanie.Fragments
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.zadanie.Adapters.FeedAdapter
+import com.example.zadanie.R
+import com.example.zadanie.ViewModels.FeedViewModel
+import com.example.zadanie.Widgets.BottomBar
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
     private lateinit var viewModel: FeedViewModel

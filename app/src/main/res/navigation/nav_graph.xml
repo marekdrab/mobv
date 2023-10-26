@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.example.zadanie.IntroFragment"
+        android:name="com.example.zadanie.Fragments.IntroFragment"
         android:label="IntroFragment">
 
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.zadanie.LoginFragment"
+        android:name="com.example.zadanie.Fragments.LoginFragment"
         android:label="LoginFragment">
         <action
             android:id="@+id/action_login_feed"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.example.zadanie.SignupFragment"
+        android:name="com.example.zadanie.Fragments.SignupFragment"
         android:label="SignupFragment">
         <action
             android:id="@+id/action_signup_feed"
@@ -37,12 +37,12 @@
 
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.example.zadanie.FeedFragment"
+        android:name="com.example.zadanie.Fragments.FeedFragment"
         android:label="FeedFragment" />
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.zadanie.ProfileFragment"
+        android:name="com.example.zadanie.Fragments.ProfileFragment"
         android:label="ProfileFragment">
 
         <action
@@ -53,21 +53,21 @@
 
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.example.zadanie.ChangePasswordFragment"
+        android:name="com.example.zadanie.Fragments.ChangePasswordFragment"
         android:label="ChangePasswordFragment" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.zadanie.MapFragment"
+        android:name="com.example.zadanie.Fragments.MapFragment"
         android:label="MapFragment" />
 
     <fragment
         android:id="@+id/forgottenPasswordFragment"
-        android:name="com.example.zadanie.ForgottenPasswordFragment"
+        android:name="com.example.zadanie.Fragments.ForgottenPasswordFragment"
         android:label="ForgottenPasswordFragment" />
 
     <fragment
         android:id="@+id/forgottenPasswordResetFragment"
-        android:name="com.example.zadanie.ForgottenPasswordResetFragment"
+        android:name="com.example.zadanie.Fragments.ForgottenPasswordResetFragment"
         android:label="ForgottenPasswordResetFragment">
 
         <action

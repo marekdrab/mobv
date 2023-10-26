@@ -1,4 +1,4 @@
-package com.example.zadanie
+package com.example.zadanie.Widgets
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
+import com.example.zadanie.R
 
 class BottomBar : ConstraintLayout {
     private var active = -1

@@ -1,12 +1,12 @@
-package com.example.zadanie
+package com.example.zadanie.Fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.zadanie.R
+import com.example.zadanie.ViewModels.FeedViewModel
 
 class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private lateinit var viewModel: FeedViewModel

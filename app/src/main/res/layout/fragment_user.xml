@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="12dp"
-    tools:context=".IntroFragment">
+    tools:context=".Fragments.IntroFragment">
 
 
     <ImageView
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
         tools:layout_editor_absoluteX="2dp" />
 
-    <com.example.zadanie.BottomBar
+    <com.example.zadanie.Widgets.BottomBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

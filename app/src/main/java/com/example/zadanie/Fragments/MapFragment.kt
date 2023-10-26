@@ -1,8 +1,9 @@
-package com.example.zadanie
+package com.example.zadanie.Fragments
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.example.zadanie.R
 import com.mapbox.maps.MapView
 import com.mapbox.maps.Style
 class MapFragment : Fragment(R.layout.fragment_map) {

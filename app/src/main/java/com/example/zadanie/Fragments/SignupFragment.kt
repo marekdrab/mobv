@@ -1,10 +1,11 @@
-package com.example.zadanie
+package com.example.zadanie.Fragments
 
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.zadanie.R
 
 class SignupFragment : Fragment(R.layout.fragment_signup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
