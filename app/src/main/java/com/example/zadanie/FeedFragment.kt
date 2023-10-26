@@ -18,7 +18,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         view.findViewById<BottomBar>(R.id.bottom_bar).setActive(BottomBar.FEED)
 
         // Inicializácia ViewModel
-        viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[FeedViewModel::class.java]
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.feed_recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(context)
