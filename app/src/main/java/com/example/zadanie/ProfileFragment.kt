@@ -18,11 +18,5 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 it.findNavController().navigate(R.id.action_change_pw)
             }
         }
-        viewModel = ViewModelProvider(requireActivity())[FeedViewModel::class.java]
-
-        viewModel.feed_items.observe(viewLifecycleOwner) { items ->
-            // Tu môžete aktualizovať UI podľa hodnoty stringValue
-            Log.d("Profile", "prvky su $items")
-        }
     }
 }
