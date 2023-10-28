@@ -43,7 +43,7 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
                 viewModel.registerUser(
                     view.findViewById<EditText>(R.id.edit_text_username).text.toString(),
                     view.findViewById<EditText>(R.id.edit_text_email).text.toString(),
-                    view.findViewById<EditText>(R.id.edit_text_email).text.toString()
+                    view.findViewById<EditText>(R.id.edit_text_password).text.toString()
                 )
             }
         }
