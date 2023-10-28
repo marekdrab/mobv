@@ -1,7 +1,10 @@
 package com.example.zadanie.Api
 
+import com.example.zadanie.Api.model.LoginResponse
 import com.example.zadanie.Api.model.RegistrationResponse
+import com.example.zadanie.Api.model.UserLogin
 import com.example.zadanie.Api.model.UserRegistration
+import com.example.zadanie.config.Config
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -10,9 +13,13 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface ApiService {
-    @Headers("x-apikey: c95332ee022df8c953ce470261efc695ecf3e784")
+    @Headers("x-apikey: ${Config.API_KEY}")
     @POST("user/create.php")
     suspend fun registerUser(@Body userInfo: UserRegistration): Response<RegistrationResponse>
+
+    @Headers("x-apikey: ${Config.API_KEY}")
+    @POST("user/login.php")
+    suspend fun loginUser(@Body userInfo: UserLogin): Response<LoginResponse>
 
     companion object{
         fun create(): ApiService {
