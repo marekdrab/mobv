@@ -1,4 +1,4 @@
-package com.example.zadanie.Widgets
+package com.example.zadanie.widgets
 
 import android.content.Context
 import android.util.AttributeSet

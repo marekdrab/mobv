@@ -1,4 +1,4 @@
-package com.example.zadanie.Model
+package com.example.zadanie.model
 
 data class User(
     val username: String,

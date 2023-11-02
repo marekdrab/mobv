@@ -1,9 +1,9 @@
-package com.example.zadanie.Api
+package com.example.zadanie.api
 
-import com.example.zadanie.Api.model.LoginResponse
-import com.example.zadanie.Api.model.RegistrationResponse
-import com.example.zadanie.Api.model.UserLogin
-import com.example.zadanie.Api.model.UserRegistration
+import com.example.zadanie.api.model.LoginResponse
+import com.example.zadanie.api.model.RegistrationResponse
+import com.example.zadanie.api.model.UserLogin
+import com.example.zadanie.api.model.UserRegistration
 import com.example.zadanie.config.Config
 import retrofit2.Response
 import retrofit2.Retrofit

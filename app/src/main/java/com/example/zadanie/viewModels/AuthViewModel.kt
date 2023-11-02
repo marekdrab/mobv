@@ -1,11 +1,11 @@
-package com.example.zadanie.ViewModels
+package com.example.zadanie.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.zadanie.Api.DataRepository
-import com.example.zadanie.Model.User
+import com.example.zadanie.api.DataRepository
+import com.example.zadanie.model.User
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val dataRepository: DataRepository) : ViewModel() {

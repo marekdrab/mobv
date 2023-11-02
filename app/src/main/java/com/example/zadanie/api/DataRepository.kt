@@ -1,8 +1,8 @@
-package com.example.zadanie.Api
+package com.example.zadanie.api
 
-import com.example.zadanie.Api.model.UserLogin
-import com.example.zadanie.Api.model.UserRegistration
-import com.example.zadanie.Model.User
+import com.example.zadanie.api.model.UserLogin
+import com.example.zadanie.api.model.UserRegistration
+import com.example.zadanie.model.User
 import java.io.IOException
 
 class DataRepository private constructor(
