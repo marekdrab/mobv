@@ -9,9 +9,8 @@ import androidx.navigation.findNavController
 import com.example.zadanie.api.DataRepository
 import com.google.android.material.snackbar.Snackbar
 import com.example.zadanie.R
-import com.example.zadanie.viewModels.AuthViewModel
 import com.example.zadanie.databinding.FragmentSignupBinding
-
+import com.example.zadanie.viewModels.AuthViewModel
 
 class SignupFragment : Fragment(R.layout.fragment_signup) {
     private lateinit var viewModel: AuthViewModel
@@ -31,6 +30,7 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSignupBinding.bind(view).apply {
             lifecycleOwner = viewLifecycleOwner
+            model = viewModel
         }.also { bnd ->
             viewModel.registrationResult.observe(viewLifecycleOwner) {
                 if (it.isEmpty()) {
@@ -41,16 +41,6 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
                         it,
                         Snackbar.LENGTH_SHORT
                     ).show()
-                }
-            }
-
-            bnd.submitButton.apply {
-                setOnClickListener {
-                    viewModel.registerUser(
-                        bnd.editTextUsername.text.toString(),
-                        bnd.editTextEmail.text.toString(),
-                        bnd.editTextPassword.text.toString()
-                    )
                 }
             }
         }
