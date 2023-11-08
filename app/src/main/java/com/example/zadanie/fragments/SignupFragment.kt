@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import com.example.zadanie.api.DataRepository
 import com.google.android.material.snackbar.Snackbar
 import com.example.zadanie.R
+import com.example.zadanie.data.PreferenceData
 import com.example.zadanie.databinding.FragmentSignupBinding
 import com.example.zadanie.viewModels.AuthViewModel
 
@@ -33,15 +34,19 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
             model = viewModel
         }.also { bnd ->
             viewModel.registrationResult.observe(viewLifecycleOwner) {
-                if (it.isEmpty()) {
-                    requireView().findNavController().navigate(R.id.action_signup_feed)
-                } else {
+                if (it.isNotEmpty()) {
                     Snackbar.make(
                         bnd.submitButton,
                         it,
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
+            }
+            viewModel.userResult.observe(viewLifecycleOwner) {
+                it?.let { user ->
+                    PreferenceData.getInstance().putUser(requireContext(), user)
+                    requireView().findNavController().navigate(R.id.action_signup_feed)
+                } ?: PreferenceData.getInstance().putUser(requireContext(), null)
             }
         }
     }

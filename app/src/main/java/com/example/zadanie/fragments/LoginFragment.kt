@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.zadanie.api.DataRepository
 import com.example.zadanie.R
+import com.example.zadanie.data.PreferenceData
 import com.example.zadanie.viewModels.AuthViewModel
 import com.example.zadanie.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -35,9 +36,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             model = viewModel
         }.also { bnd ->
             viewModel.loginResult.observe(viewLifecycleOwner) {
-                if (it.isEmpty()) {
-                    requireView().findNavController().navigate(R.id.action_login_feed)
-                } else {
+                if (it.isNotEmpty()) {
                     Snackbar.make(
                         bnd.submitButton,
                         it,
@@ -46,6 +45,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 }
             }
 
+            viewModel.userResult.observe(viewLifecycleOwner) {
+                it?.let { user ->
+                    PreferenceData.getInstance().putUser(requireContext(), user)
+                    requireView().findNavController().navigate(R.id.action_login_feed)
+                } ?: PreferenceData.getInstance().putUser(requireContext(), null)
+            }
         }
 
         view.findViewById<Button>(R.id.forgotten_pw).apply {

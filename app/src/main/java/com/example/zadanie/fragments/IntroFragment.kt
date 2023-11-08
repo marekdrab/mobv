@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.zadanie.R
+import com.example.zadanie.data.PreferenceData
 import com.example.zadanie.databinding.FragmentIntroBinding
 
 class IntroFragment : Fragment(R.layout.fragment_intro) {
@@ -25,6 +26,10 @@ class IntroFragment : Fragment(R.layout.fragment_intro) {
                     it.findNavController().navigate(R.id.action_intro_signup)
                 }
             }
+        }
+        val user = PreferenceData.getInstance().getUser(requireContext())
+        if (user != null) {
+            requireView().findNavController().navigate(R.id.action_intro_feed)
         }
     }
 
