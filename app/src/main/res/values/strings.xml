@@ -17,4 +17,8 @@
     <string name="old_pw">Stare heslo</string>
     <string name="new_pw">Nove heslo</string>
     <string name="submit">Potvrdit</string>
+    <string name="profile">Profile</string>
+    <string name="load_profile">Nacitaj profil</string>
+    <string name="logout">Odhlasit sa</string>
+    <string name="name">Meno</string>
 </resources>
