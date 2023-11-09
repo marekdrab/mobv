@@ -1,10 +1,10 @@
-package com.example.zadanie.ViewModels
+package com.example.zadanie.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.zadanie.Adapters.MyItem
+import com.example.zadanie.adapters.MyItem
 import com.example.zadanie.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

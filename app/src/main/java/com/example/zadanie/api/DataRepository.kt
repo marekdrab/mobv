@@ -1,8 +1,11 @@
-package com.example.zadanie.Api
+package com.example.zadanie.api
 
-import com.example.zadanie.Api.model.UserLogin
-import com.example.zadanie.Api.model.UserRegistration
-import com.example.zadanie.Model.User
+import android.content.Context
+import com.example.zadanie.api.model.RefreshTokenRequest
+import com.example.zadanie.api.model.UserLogin
+import com.example.zadanie.api.model.UserRegistration
+import com.example.zadanie.config.Config
+import com.example.zadanie.model.User
 import java.io.IOException
 
 class DataRepository private constructor(
@@ -15,10 +18,10 @@ class DataRepository private constructor(
         private var INSTANCE: DataRepository? = null
         private val lock = Any()
 
-        fun getInstance(): DataRepository =
+        fun getInstance(context: Context): DataRepository =
             INSTANCE ?: synchronized(lock) {
                 INSTANCE
-                    ?: DataRepository(ApiService.create()).also { INSTANCE = it }
+                    ?: DataRepository(ApiService.create(context)).also { INSTANCE = it }
             }
     }
 
@@ -83,6 +86,28 @@ class DataRepository private constructor(
             ex.printStackTrace()
         }
         return Pair("Fatal error. Failed to login user.", null)
+    }
+
+    suspend fun apiGetUser(
+        uid: String
+    ): Pair<String, User?> {
+        try {
+            val response = service.getUser(uid)
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return Pair("", User(it.name, "", it.id, "", "", it.photo))
+                }
+            }
+
+            return Pair("Failed to load user", null)
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return Pair("Check internet connection. Failed to load user.", null)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        return Pair("Fatal error. Failed to load user.", null)
     }
 }
 
