@@ -76,9 +76,10 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/mapView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.137"
+            app:layout_constraintHorizontal_bias="0.85"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switchButton" />
+            app:layout_constraintTop_toBottomOf="@+id/switchButton"
+            app:layout_constraintVertical_bias="0.781" />
 
         <Button
             android:id="@+id/insertTimeButton"
@@ -89,10 +90,10 @@
             android:text="Insert Time"
             app:layout_constraintBottom_toTopOf="@+id/mapView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.325"
-            app:layout_constraintStart_toEndOf="@+id/timeInput"
-            app:layout_constraintTop_toBottomOf="@+id/switchButton"
-            app:layout_constraintVertical_bias="0.206" />
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeInput"
+            app:layout_constraintVertical_bias="0.562" />
 
         <Button
             android:id="@+id/forgotten_pw"
@@ -133,10 +134,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/location_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:checked="@={model.sharingLocation}"
+            android:text="@string/get_location"
+            app:layout_constraintBottom_toTopOf="@+id/mapView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.059"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeInput"
+            app:layout_constraintVertical_bias="0.62" />
+
         <com.mapbox.maps.MapView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="240dp"
             app:layout_constraintBottom_toTopOf="@+id/bottom_bar" />
 
         <com.example.zadanie.widgets.BottomBar

@@ -2,6 +2,7 @@ package com.example.zadanie.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.zadanie.config.Config
 import com.example.zadanie.model.User
 
 class PreferenceData private constructor() {
@@ -36,6 +37,20 @@ class PreferenceData private constructor() {
         return User.fromJson(json)
     }
 
+    fun putSharing(context: Context?, sharing: Boolean) {
+        val sharedPref = getSharedPreferences(context) ?: return
+        val editor = sharedPref.edit()
+        editor.putBoolean(sharingKey, sharing)
+        editor.apply()
+    }
+
+    fun getSharing(context: Context?): Boolean {
+        val sharedPref = getSharedPreferences(context) ?: return false
+        val sharing = sharedPref.getBoolean(sharingKey, false)
+
+        return sharing
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: PreferenceData? = null
@@ -48,8 +63,9 @@ class PreferenceData private constructor() {
                     ?: PreferenceData().also { INSTANCE = it }
             }
 
-        private const val shpKey = "com.example.zadanie"
+        private const val shpKey = Config.SharedPreferences_KEY
         private const val userKey = "userKey"
+        private const val sharingKey = "sharingKey"
 
     }
 

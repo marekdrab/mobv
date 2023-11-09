@@ -21,4 +21,5 @@
     <string name="load_profile">Nacitaj profil</string>
     <string name="logout">Odhlasit sa</string>
     <string name="name">Meno</string>
+    <string name="get_location">Ziskavat polohu</string>
 </resources>
