@@ -1,6 +1,7 @@
 package com.example.zadanie.api
 
 import android.content.Context
+import com.example.zadanie.api.model.GeofenceListResponse
 import com.example.zadanie.api.model.LoginResponse
 import com.example.zadanie.api.model.RefreshTokenRequest
 import com.example.zadanie.api.model.RefreshTokenResponse
@@ -44,6 +45,8 @@ interface ApiService {
     fun refreshTokenBlocking(
         @Body refreshInfo: RefreshTokenRequest
     ): Call<RefreshTokenResponse>
+    @GET("geofence/list.php")
+    suspend fun listGeofence(): Response<List<GeofenceListResponse>>
 
     companion object{
         fun create(context: Context): ApiService {
