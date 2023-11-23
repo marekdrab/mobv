@@ -51,7 +51,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
     val requestPermissionLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
+            ActivityResultContracts.RequestPermission()
         ) {
 
         }
@@ -122,7 +122,9 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         Log.d("ProfileFragment", "turnOnSharing")
         if (!hasPermissions(requireContext())) {
             binding?.locationSwitch?.isChecked = false
-            requestPermissionLauncher.launch(PERMISSIONS_REQUIRED)
+            for (p in PERMISSIONS_REQUIRED) {
+                requestPermissionLauncher.launch(p)
+            }
             return
         }
         PreferenceData.getInstance().putSharing(requireContext(), true)
@@ -171,6 +173,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             addOnSuccessListener {
                 // Geofences boli úspešne pridané
                 Log.d("ProfileFragment", "geofence vytvoreny")
+                viewModel.updateGeofence(location.latitude, location.longitude, 100.0)
             }
             addOnFailureListener {
                 // Chyba pri pridaní geofences

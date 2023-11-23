@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.zadanie.database.entities.GeofenceEntity
 import com.example.zadanie.database.entities.UserEntity
 
 @Dao
@@ -12,6 +13,8 @@ interface DbDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserItems(items: List<UserEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertGeofence(item: GeofenceEntity)
 
     @Query("select * from users where uid=:uid")
     fun getUserItem(uid: String): LiveData<UserEntity?>

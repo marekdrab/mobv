@@ -3,6 +3,7 @@ package com.example.zadanie.fragments
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,16 +35,29 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     private var selectedPoint: CircleAnnotation? = null
     private var lastLocation: Point? = null
     private lateinit var annotationManager: CircleAnnotationManager
-    val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+    private val PERMISSIONS_REQUIRED = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+        }
 
-    val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            initLocationComponent()
-            addLocationListeners()
+        else -> {
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
         }
     }
+
+    val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) {
+
+        }
 
     fun hasPermissions(context: Context) = PERMISSIONS_REQUIRED.all {
         ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
@@ -74,7 +88,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
             bnd.myLocation.setOnClickListener {
                 if (!hasPermissions(requireContext())) {
                     requestPermissionLauncher.launch(
-                        Manifest.permission.ACCESS_FINE_LOCATION
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
                     )
                 } else {
                     lastLocation?.let { refreshLocation(it) }

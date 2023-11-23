@@ -1,14 +1,14 @@
 package com.example.zadanie.api
 
 import android.content.Context
-import com.example.zadanie.api.model.RefreshTokenRequest
 import com.example.zadanie.api.model.UserLogin
 import com.example.zadanie.api.model.UserRegistration
-import com.example.zadanie.config.Config
 import com.example.zadanie.database.AppRoomDatabase
 import com.example.zadanie.database.LocalCache
 import com.example.zadanie.database.entities.UserEntity
+import com.example.zadanie.database.entities.GeofenceEntity
 import com.example.zadanie.model.User
+import com.example.zadanie.api.model.GeofenceUpdateRequest
 import java.io.IOException
 
 class DataRepository private constructor(
@@ -59,6 +59,49 @@ class DataRepository private constructor(
     }
 
     fun getUsers() = cache.getUsers()
+
+    suspend fun insertGeofence(item: GeofenceEntity) {
+        cache.insertGeofence(item)
+        try {
+            val response =
+                service.updateGeofence(GeofenceUpdateRequest(item.lat, item.lon, item.radius))
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+
+                    item.uploaded = true
+                    cache.insertGeofence(item)
+                    return
+                }
+            }
+
+            return
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+    }
+
+    suspend fun removeGeofence() {
+        try {
+            val response = service.deleteGeofence()
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return
+                }
+            }
+
+            return
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+    }
 
     suspend fun apiRegisterUser(username: String, email: String, password: String) : Pair<String,User?>{
         if (username.isEmpty()){
@@ -144,5 +187,7 @@ class DataRepository private constructor(
         }
         return Pair("Fatal error. Failed to load user.", null)
     }
+
+
 }
 

@@ -1,6 +1,7 @@
 package com.example.zadanie.database
 
 import androidx.lifecycle.LiveData
+import com.example.zadanie.database.entities.GeofenceEntity
 import com.example.zadanie.database.entities.UserEntity
 
 class LocalCache(private val dao: DbDao) {
@@ -23,4 +24,7 @@ class LocalCache(private val dao: DbDao) {
         dao.deleteUserItems()
     }
 
+    suspend fun insertGeofence(item: GeofenceEntity) {
+        dao.insertGeofence(item)
+    }
 }

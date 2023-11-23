@@ -2,6 +2,8 @@ package com.example.zadanie.api
 
 import android.content.Context
 import com.example.zadanie.api.model.GeofenceListResponse
+import com.example.zadanie.api.model.GeofenceUpdateRequest
+import com.example.zadanie.api.model.GeofenceUpdateResponse
 import com.example.zadanie.api.model.LoginResponse
 import com.example.zadanie.api.model.RefreshTokenRequest
 import com.example.zadanie.api.model.RefreshTokenResponse
@@ -18,6 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.HeaderMap
 import retrofit2.http.Headers
@@ -47,6 +50,13 @@ interface ApiService {
     ): Call<RefreshTokenResponse>
     @GET("geofence/list.php")
     suspend fun listGeofence(): Response<List<GeofenceListResponse>>
+
+    @POST("geofence/update.php")
+    suspend fun updateGeofence(@Body body: GeofenceUpdateRequest): Response<GeofenceUpdateResponse>
+
+    @DELETE("geofence/update.php")
+    suspend fun deleteGeofence(): Response<GeofenceUpdateResponse>
+
 
     companion object{
         fun create(context: Context): ApiService {
