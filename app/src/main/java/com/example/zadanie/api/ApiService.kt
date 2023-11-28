@@ -49,7 +49,7 @@ interface ApiService {
         @Body refreshInfo: RefreshTokenRequest
     ): Call<RefreshTokenResponse>
     @GET("geofence/list.php")
-    suspend fun listGeofence(): Response<List<GeofenceListResponse>>
+    suspend fun listGeofence(): Response<GeofenceListResponse>
 
     @POST("geofence/update.php")
     suspend fun updateGeofence(@Body body: GeofenceUpdateRequest): Response<GeofenceUpdateResponse>
