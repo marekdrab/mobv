@@ -44,7 +44,29 @@
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.example.zadanie.fragments.FeedFragment"
-        android:label="FeedFragment" />
+        android:label="FeedFragment" >
+
+        <action
+            android:id="@+id/action_feed_to_detail"
+            app:destination="@id/userDetailFragment" >
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.zadanie.fragments.UserDetailFragment"
+        android:label="UserDetailFragment" >
+
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/profileFragment"

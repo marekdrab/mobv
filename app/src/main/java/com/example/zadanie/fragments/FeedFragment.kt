@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zadanie.adapters.FeedAdapter
 import com.example.zadanie.R
 import com.example.zadanie.api.DataRepository
+import com.example.zadanie.database.entities.UserEntity
 import com.example.zadanie.viewModels.FeedViewModel
 import com.example.zadanie.widgets.BottomBar
 import com.example.zadanie.databinding.FragmentFeedBinding
@@ -41,7 +42,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
             // Pozorovanie zmeny hodnoty
             viewModel.feed_items.observe(viewLifecycleOwner) { items ->
-                Log.d("FeedFragment", "nove hodnoty $items")
                 feedAdapter.updateItems(items ?: emptyList())
             }
 

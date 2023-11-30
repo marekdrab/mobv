@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zadanie.R
 import com.example.zadanie.config.Config
 import com.example.zadanie.database.entities.UserEntity
+import com.example.zadanie.fragments.FeedFragment
+import com.example.zadanie.fragments.FeedFragmentDirections
 import com.example.zadanie.utils.ItemDiffCallback
 import com.squareup.picasso.Picasso
 
@@ -30,7 +33,6 @@ class FeedAdapter() : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
     // Táto metóda prepojí dáta s ViewHolderom
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         val item = items[position]
-        Log.d("item", item.toString())
         holder.itemView.findViewById<TextView>(R.id.item_text).text = item.name
 
         val imageView = holder.itemView.findViewById<ImageView>(R.id.item_image)
@@ -43,10 +45,10 @@ class FeedAdapter() : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
             imageView.setImageResource(R.drawable.baseline_profile) // Replace with your default image
         }
 
-
-
         holder.itemView.setOnClickListener {
-            Log.d("clicked", "clicked")
+            val action = FeedFragmentDirections.actionFeedToDetail()
+            action.id = items[position].uid
+            it.findNavController().navigate(action)
         }
     }
 
