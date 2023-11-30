@@ -101,23 +101,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 viewModel.loadUser(it.id)
             }
 
-            bnd.forgottenPw.setOnClickListener {
-                it.findNavController().navigate(R.id.action_change_pw)
-            }
-
-            bnd.logoutBtn.setOnClickListener {
+            bnd.settingsBtn.setOnClickListener {
                 PreferenceData.getInstance().clearData(requireContext())
-                it.findNavController().navigate(R.id.action_profile_intro)
-            }
-
-            viewModel.profileResult.observe(viewLifecycleOwner) {
-                if (it.isNotEmpty()) {
-                    Snackbar.make(
-                        bnd.loadProfileBtn,
-                        it,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
+                it.findNavController().navigate(R.id.action_profile_settings)
             }
 
             bnd.locationSwitch.isChecked = PreferenceData.getInstance().getSharing(requireContext())

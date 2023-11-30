@@ -22,4 +22,5 @@
     <string name="logout">Odhlasit sa</string>
     <string name="name">Meno</string>
     <string name="get_location">Ziskavat polohu</string>
+    <string name="settings">Nastavenia</string>
 </resources>
