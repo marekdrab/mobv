@@ -1,16 +1,20 @@
 package com.example.zadanie.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zadanie.R
+import com.example.zadanie.config.Config
 import com.example.zadanie.database.entities.UserEntity
 import com.example.zadanie.utils.ItemDiffCallback
+import com.squareup.picasso.Picasso
 
-class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+class FeedAdapter() : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
     private var items: List<UserEntity> = listOf()
 
     // ViewHolder poskytuje odkazy na zobrazenia v každej položke
@@ -25,7 +29,25 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     // Táto metóda prepojí dáta s ViewHolderom
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
-        holder.itemView.findViewById<TextView>(R.id.item_text).text = items[position].name
+        val item = items[position]
+        Log.d("item", item.toString())
+        holder.itemView.findViewById<TextView>(R.id.item_text).text = item.name
+
+        val imageView = holder.itemView.findViewById<ImageView>(R.id.item_image)
+        if (item.photo.isNotEmpty()) {
+            Picasso.get()
+                .load(Config.IMAGE_BASE_URL + item.photo) // Complete URL
+                .into(imageView) // ImageView to load the image into
+        } else {
+            // Optional: Handle the case where there is no image URL
+            imageView.setImageResource(R.drawable.baseline_profile) // Replace with your default image
+        }
+
+
+
+        holder.itemView.setOnClickListener {
+            Log.d("clicked", "clicked")
+        }
     }
 
     // Vracia počet položiek v zozname
