@@ -98,7 +98,13 @@
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.example.zadanie.fragments.ChangePasswordFragment"
-        android:label="ChangePasswordFragment" />
+        android:label="ChangePasswordFragment" >
+
+        <action
+            android:id="@+id/action_change_pw_profile"
+            app:popUpToInclusive="true"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.zadanie.fragments.MapFragment"

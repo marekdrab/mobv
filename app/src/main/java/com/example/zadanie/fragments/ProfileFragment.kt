@@ -102,7 +102,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }
 
             bnd.settingsBtn.setOnClickListener {
-                PreferenceData.getInstance().clearData(requireContext())
                 it.findNavController().navigate(R.id.action_profile_settings)
             }
 

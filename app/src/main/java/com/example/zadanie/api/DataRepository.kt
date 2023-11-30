@@ -9,7 +9,9 @@ import com.example.zadanie.database.entities.UserEntity
 import com.example.zadanie.database.entities.GeofenceEntity
 import com.example.zadanie.model.User
 import com.example.zadanie.api.model.GeofenceUpdateRequest
+import com.example.zadanie.api.model.PasswordChangeRequest
 import java.io.IOException
+import java.io.StringReader
 
 class DataRepository private constructor(
     private val service: ApiService,
@@ -190,6 +192,27 @@ class DataRepository private constructor(
         return Pair("Fatal error. Failed to load user.", null)
     }
 
+    suspend fun apiChangePassword(
+        oldPassword: String,
+        newPassword: String
+    ): Pair<Boolean, String?> {
+        try {
+            val response = service.changePassword(PasswordChangeRequest(oldPassword, newPassword))
 
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return Pair(true, null)
+                }
+            }
+
+            return Pair(false, "Failed to change password.")
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return Pair(false, "Check internet connection. Failed to change password.")
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        return Pair(false, "Fatal error. Failed to load user.")
+    }
 }
 

@@ -25,3 +25,5 @@ data class GeofenceListAllResponse(
 )
 
 data class GeofenceUpdateResponse(val success: String)
+data class PasswordChangeResponse(val success: String)
+data class PasswordResetResponse(val success: String)
