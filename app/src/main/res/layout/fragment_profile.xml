@@ -23,6 +23,7 @@
             android:layout_height="128dp"
             android:layout_marginStart="24dp"
             android:padding="13dp"
+            app:imageUrl="@{model.userResult.photo}"
             android:src="@drawable/baseline_profile"
             app:layout_constraintBottom_toBottomOf="@+id/bottom_bar"
             app:layout_constraintStart_toStartOf="parent"
