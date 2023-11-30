@@ -95,11 +95,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             model = viewModel
         }.also { bnd ->
             bnd.bottomBar.setActive(BottomBar.PROFILE)
-            bnd.loadProfileBtn.setOnClickListener {
-                val user = PreferenceData.getInstance().getUser(requireContext())
-                user?.let {
-                    viewModel.loadUser(it.id)
-                }
+
+            val user = PreferenceData.getInstance().getUser(requireContext())
+            user?.let {
+                viewModel.loadUser(it.id)
             }
 
             bnd.forgottenPw.setOnClickListener {
