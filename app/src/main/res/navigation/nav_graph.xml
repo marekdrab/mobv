@@ -114,10 +114,11 @@
     <fragment
         android:id="@+id/forgottenPasswordFragment"
         android:name="com.example.zadanie.fragments.ForgottenPasswordFragment"
-        android:label="ForgottenPasswordResetFragment">
+        android:label="ForgottenPasswordFragment">
 
         <action
             android:id="@+id/action_pw_reset_to_login"
+            app:popUpToInclusive="true"
             app:destination="@id/loginFragment" />
 
     </fragment>

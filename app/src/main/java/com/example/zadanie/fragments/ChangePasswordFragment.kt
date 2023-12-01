@@ -46,7 +46,7 @@ class ChangePasswordFragment : Fragment(R.layout.fragment_change_password) {
             if (newPassword == repeatNewPassword) {
                 viewModel.changePassword(oldPassword, newPassword)
             } else {
-                binding?.newPwRepeat?.setError("Passwords don't match up")
+                binding?.newPwRepeat?.error = "Passwords don't match up"
             }
 
             viewModel.changePasswordResult.observe(viewLifecycleOwner) { result ->

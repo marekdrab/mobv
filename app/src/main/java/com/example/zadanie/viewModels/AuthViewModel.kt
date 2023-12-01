@@ -62,4 +62,16 @@ class AuthViewModel(private val dataRepository: DataRepository) : ViewModel() {
             _changePasswordResultMessage.postValue(result.second)
         }
     }
+
+    private val _resetPasswordResult = MutableLiveData<Boolean?>()
+    val resetPasswordResult: LiveData<Boolean?> get() = _resetPasswordResult
+    private val _resetPasswordResultMessage = MutableLiveData<String?>()
+    val resetPasswordResultMessage: LiveData<String?> get() = _resetPasswordResultMessage
+    fun resetPassword(email: String) {
+        viewModelScope.launch {
+            val result = dataRepository.apiResetPassword(email)
+            _resetPasswordResult.postValue(result.first)
+            _resetPasswordResultMessage.postValue(result.second)
+        }
+    }
 }
