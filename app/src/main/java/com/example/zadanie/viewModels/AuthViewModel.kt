@@ -43,6 +43,12 @@ class AuthViewModel(private val dataRepository: DataRepository) : ViewModel() {
         }
     }
 
+    fun logoutUser() {
+        _userResult.postValue(null)
+        password.postValue("")
+        username.postValue("")
+    }
+
     private val _changePasswordResult = MutableLiveData<String>()
     val changePasswordResult: LiveData<String> get() = _changePasswordResult
 

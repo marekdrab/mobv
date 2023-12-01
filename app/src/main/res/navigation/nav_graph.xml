@@ -110,14 +110,10 @@
         android:name="com.example.zadanie.fragments.MapFragment"
         android:label="MapFragment" />
 
+
     <fragment
         android:id="@+id/forgottenPasswordFragment"
         android:name="com.example.zadanie.fragments.ForgottenPasswordFragment"
-        android:label="ForgottenPasswordFragment" />
-
-    <fragment
-        android:id="@+id/forgottenPasswordResetFragment"
-        android:name="com.example.zadanie.fragments.ForgottenPasswordResetFragment"
         android:label="ForgottenPasswordResetFragment">
 
         <action
@@ -141,9 +137,5 @@
     <action
         android:id="@+id/action_to_forgotten_pw"
         app:destination="@id/forgottenPasswordFragment" />
-
-    <action
-        android:id="@+id/action_to_pw_reset"
-        app:destination="@id/forgottenPasswordResetFragment" />
 
 </navigation>
