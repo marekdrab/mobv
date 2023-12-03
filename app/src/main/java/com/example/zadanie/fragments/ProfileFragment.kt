@@ -17,6 +17,8 @@ import android.content.Intent
 import android.location.Location
 import android.os.Build
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
@@ -25,6 +27,7 @@ import androidx.work.WorkManager
 import com.example.zadanie.R
 import com.example.zadanie.api.DataRepository
 import com.example.zadanie.data.PreferenceData
+import com.example.zadanie.databinding.FragmentMapBinding
 import com.example.zadanie.widgets.BottomBar
 import com.example.zadanie.databinding.FragmentProfileBinding
 import com.example.zadanie.geofence.GeofenceBroadcastReceiver
@@ -33,12 +36,28 @@ import com.example.zadanie.workers.MyWorker
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.snackbar.Snackbar
+import com.mapbox.android.gestures.MoveGestureDetector
+import com.mapbox.geojson.Point
+import com.mapbox.maps.CameraOptions
+import com.mapbox.maps.Style
+import com.mapbox.maps.plugin.annotation.annotations
+import com.mapbox.maps.plugin.annotation.generated.CircleAnnotation
+import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager
+import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationOptions
+import com.mapbox.maps.plugin.annotation.generated.createCircleAnnotationManager
+import com.mapbox.maps.plugin.gestures.OnMoveListener
+import com.mapbox.maps.plugin.gestures.addOnMapClickListener
+import com.mapbox.maps.plugin.gestures.gestures
+import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
+import com.mapbox.maps.plugin.locationcomponent.location
 import java.util.concurrent.TimeUnit
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var viewModel: ProfileViewModel
-    private var binding: FragmentProfileBinding? = null
+    private lateinit var binding: FragmentProfileBinding
+    private var selectedPoint: CircleAnnotation? = null
+    private var lastLocation: Point? = null
+    private lateinit var annotationManager: CircleAnnotationManager
     private val PERMISSIONS_REQUIRED = when {
         Build.VERSION.SDK_INT >= 33 -> { // android 13
             arrayOf(
@@ -87,10 +106,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         })[ProfileViewModel::class.java]
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentProfileBinding.bind(view).apply {
+        binding.apply {
             lifecycleOwner = viewLifecycleOwner
             model = viewModel
         }.also { bnd ->
@@ -100,6 +127,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             user?.let {
                 viewModel.loadUser(it.id)
             }
+
+            annotationManager = bnd.mapView.annotations.createCircleAnnotationManager()
+
+            val hasPermission = hasPermissions(requireContext())
+            onMapReady(hasPermission)
 
             bnd.settingsBtn.setOnClickListener {
                 it.findNavController().navigate(R.id.action_profile_settings)
@@ -214,5 +246,103 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun cancelWorker() {
         WorkManager.getInstance(requireContext()).cancelUniqueWork("myworker")
+    }
+
+    private fun onMapReady(enabled: Boolean) {
+        binding.mapView.getMapboxMap().setCamera(
+            CameraOptions.Builder()
+                .center(Point.fromLngLat(14.3539484, 49.8001304))
+                .zoom(2.0)
+                .build()
+        )
+        binding.mapView.getMapboxMap().loadStyleUri(
+            Style.MAPBOX_STREETS
+        ) {
+            if (enabled) {
+                initLocationComponent()
+                addLocationListeners()
+            }
+        }
+
+        binding.mapView.getMapboxMap().addOnMapClickListener {
+            if (hasPermissions(requireContext())) {
+                onCameraTrackingDismissed()
+            }
+            true
+        }
+    }
+
+    private fun initLocationComponent() {
+        Log.d("MapFragment","initLocationComponent")
+        val locationComponentPlugin = binding.mapView.location
+        locationComponentPlugin.updateSettings {
+            this.enabled = true
+            this.pulsingEnabled = true
+        }
+    }
+
+    private fun addLocationListeners() {
+        Log.d("MapFragment","addLocationListeners")
+        binding.mapView.location.addOnIndicatorPositionChangedListener(
+            onIndicatorPositionChangedListener
+        )
+        binding.mapView.gestures.addOnMoveListener(onMoveListener)
+    }
+    private val onIndicatorPositionChangedListener = OnIndicatorPositionChangedListener {
+        refreshLocation(it)
+    }
+
+    private fun refreshLocation(point: Point) {
+        binding.mapView.getMapboxMap().setCamera(CameraOptions.Builder().center(point).zoom(14.0).build())
+        binding.mapView.gestures.focalPoint = binding.mapView.getMapboxMap().pixelForCoordinate(point)
+        lastLocation = point
+        addMarker(point)
+    }
+
+    private val onMoveListener = object : OnMoveListener {
+        override fun onMoveBegin(detector: MoveGestureDetector) {
+            onCameraTrackingDismissed()
+        }
+
+        override fun onMove(detector: MoveGestureDetector): Boolean {
+            return false
+        }
+
+        override fun onMoveEnd(detector: MoveGestureDetector) {}
+    }
+
+    private fun onCameraTrackingDismissed() {
+        binding.mapView.apply {
+            location.removeOnIndicatorPositionChangedListener(onIndicatorPositionChangedListener)
+            gestures.removeOnMoveListener(onMoveListener)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.mapView.apply {
+            location.removeOnIndicatorPositionChangedListener(onIndicatorPositionChangedListener)
+            gestures.removeOnMoveListener(onMoveListener)
+        }
+    }
+
+    private fun addMarker(point: Point) {
+
+        if (selectedPoint == null) {
+            annotationManager.deleteAll()
+            val pointAnnotationOptions = CircleAnnotationOptions()
+                .withPoint(point)
+                .withCircleRadius(100.0)
+                .withCircleOpacity(0.2)
+                .withCircleColor("#000")
+                .withCircleStrokeWidth(2.0)
+                .withCircleStrokeColor("#ffffff")
+            selectedPoint = annotationManager.create(pointAnnotationOptions)
+        } else {
+            selectedPoint?.let {
+                it.point = point
+                annotationManager.update(it)
+            }
+        }
     }
 }
