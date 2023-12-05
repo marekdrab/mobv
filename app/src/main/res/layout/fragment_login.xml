@@ -37,13 +37,13 @@
             android:layout_marginTop="48dp"
             android:text="@string/username"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.035"
+            app:layout_constraintHorizontal_bias="0.062"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header_title" />
 
         <EditText
             android:id="@+id/edit_text_username"
-            android:layout_width="350dp"
+            android:layout_width="330dp"
             android:layout_height="50dp"
             android:hint="@string/insert_username"
             android:text="@={model.username}"
@@ -58,13 +58,13 @@
             android:layout_height="wrap_content"
             android:text="@string/pw"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.032"
+            app:layout_constraintHorizontal_bias="0.062"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_username" />
 
         <EditText
             android:id="@+id/edit_text_password"
-            android:layout_width="350dp"
+            android:layout_width="330dp"
             android:layout_height="50dp"
             android:hint="@string/insert_pw"
             android:inputType="textPassword"

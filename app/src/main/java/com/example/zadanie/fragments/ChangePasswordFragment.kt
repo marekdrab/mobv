@@ -14,6 +14,7 @@ import com.example.zadanie.data.PreferenceData
 import com.example.zadanie.databinding.FragmentChangePasswordBinding
 import com.example.zadanie.databinding.FragmentLoginBinding
 import com.example.zadanie.viewModels.AuthViewModel
+import com.example.zadanie.widgets.BottomBar
 import com.google.android.material.snackbar.Snackbar
 
 class ChangePasswordFragment : Fragment(R.layout.fragment_change_password) {
@@ -37,8 +38,10 @@ class ChangePasswordFragment : Fragment(R.layout.fragment_change_password) {
             lifecycleOwner = viewLifecycleOwner
             model = viewModel
         }
+        binding?.bottomBar?.setActive(BottomBar.PROFILE)
 
         binding?.submitButton?.setOnClickListener {
+
             val oldPassword = binding?.oldPw?.text.toString()
             val newPassword = binding?.newPw?.text.toString()
             val repeatNewPassword = binding?.newPwRepeat?.text.toString()

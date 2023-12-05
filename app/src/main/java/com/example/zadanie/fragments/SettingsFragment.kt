@@ -12,6 +12,7 @@ import com.example.zadanie.api.DataRepository
 import com.example.zadanie.data.PreferenceData
 import com.example.zadanie.databinding.FragmentSettingsBinding
 import com.example.zadanie.viewModels.AuthViewModel
+import com.example.zadanie.widgets.BottomBar
 
 class SettingsFragment: Fragment(R.layout.fragment_settings) {
     private var binding: FragmentSettingsBinding? = null
@@ -33,6 +34,8 @@ class SettingsFragment: Fragment(R.layout.fragment_settings) {
         binding = FragmentSettingsBinding.bind(view).apply {
             lifecycleOwner = viewLifecycleOwner
         }.also { bnd ->
+            bnd.bottomBar.setActive(BottomBar.PROFILE)
+
             bnd.forgottenPw.apply {
                 setOnClickListener {
                     it.findNavController().navigate(R.id.action_change_pw)

@@ -29,6 +29,6 @@
     <string name="profile_photo_desc">Profilová fotka</string>
     <string name="login">Prihlásiť sa</string>
     <string name="username">Login</string>
-    <string name="insert_username">Zadajt login</string>
+    <string name="insert_username">Zadajte login</string>
     <string name="registrate">Registruj sa</string>
 </resources>

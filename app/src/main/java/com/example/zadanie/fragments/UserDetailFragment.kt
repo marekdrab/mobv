@@ -17,6 +17,7 @@ import com.example.zadanie.config.Config
 import com.squareup.picasso.Picasso
 import com.example.zadanie.databinding.FragmentUserDetailBinding
 import com.example.zadanie.viewModels.ProfileViewModel
+import com.example.zadanie.widgets.BottomBar
 
 class UserDetailFragment : Fragment(R.layout.fragment_user_detail) {
     private lateinit var viewModel: ProfileViewModel
@@ -45,13 +46,8 @@ class UserDetailFragment : Fragment(R.layout.fragment_user_detail) {
 
         val id = arguments?.getString("id")
         id?.let {
+            binding?.bottomBar?.setActive(BottomBar.FEED)
             viewModel.loadUser(it)
         }
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
     }
 }
