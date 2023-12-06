@@ -44,12 +44,45 @@
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.example.zadanie.fragments.FeedFragment"
-        android:label="FeedFragment" />
+        android:label="FeedFragment" >
+
+        <action
+            android:id="@+id/action_feed_to_detail"
+            app:destination="@id/userDetailFragment" >
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.zadanie.fragments.UserDetailFragment"
+        android:label="UserDetailFragment" >
+
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.zadanie.fragments.ProfileFragment"
         android:label="ProfileFragment">
+
+        <action
+            android:id="@+id/action_profile_settings"
+            app:destination="@id/settingsFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.zadanie.fragments.SettingsFragment"
+        android:label="SettingsFragment" >
 
         <action
             android:id="@+id/action_change_pw"
@@ -59,30 +92,33 @@
             android:id="@+id/action_profile_intro"
             app:popUpToInclusive="true"
             app:destination="@id/introFragment" />
-
     </fragment>
+
 
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.example.zadanie.fragments.ChangePasswordFragment"
-        android:label="ChangePasswordFragment" />
+        android:label="ChangePasswordFragment" >
+
+        <action
+            android:id="@+id/action_change_pw_profile"
+            app:popUpToInclusive="true"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.zadanie.fragments.MapFragment"
         android:label="MapFragment" />
 
+
     <fragment
         android:id="@+id/forgottenPasswordFragment"
         android:name="com.example.zadanie.fragments.ForgottenPasswordFragment"
-        android:label="ForgottenPasswordFragment" />
-
-    <fragment
-        android:id="@+id/forgottenPasswordResetFragment"
-        android:name="com.example.zadanie.fragments.ForgottenPasswordResetFragment"
-        android:label="ForgottenPasswordResetFragment">
+        android:label="ForgottenPasswordFragment">
 
         <action
             android:id="@+id/action_pw_reset_to_login"
+            app:popUpToInclusive="true"
             app:destination="@id/loginFragment" />
 
     </fragment>
@@ -102,9 +138,5 @@
     <action
         android:id="@+id/action_to_forgotten_pw"
         app:destination="@id/forgottenPasswordFragment" />
-
-    <action
-        android:id="@+id/action_to_pw_reset"
-        app:destination="@id/forgottenPasswordResetFragment" />
 
 </navigation>

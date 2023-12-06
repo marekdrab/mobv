@@ -5,6 +5,10 @@ import com.example.zadanie.api.model.GeofenceListResponse
 import com.example.zadanie.api.model.GeofenceUpdateRequest
 import com.example.zadanie.api.model.GeofenceUpdateResponse
 import com.example.zadanie.api.model.LoginResponse
+import com.example.zadanie.api.model.PasswordChangeRequest
+import com.example.zadanie.api.model.PasswordChangeResponse
+import com.example.zadanie.api.model.PasswordResetRequest
+import com.example.zadanie.api.model.PasswordResetResponse
 import com.example.zadanie.api.model.RefreshTokenRequest
 import com.example.zadanie.api.model.RefreshTokenResponse
 import com.example.zadanie.api.model.RegistrationResponse
@@ -38,6 +42,16 @@ interface ApiService {
     suspend fun getUser(
         @Query("id") id: String
     ): Response<UserResponse>
+
+    @POST("user/reset.php")
+    suspend fun resetPassword(
+        @Body passwordResetRequest: PasswordResetRequest
+    ): Response<PasswordResetResponse>
+
+    @POST("user/password.php")
+    suspend fun changePassword(
+        @Body passwordResetRequest: PasswordChangeRequest
+    ): Response<PasswordChangeResponse>
 
     @POST("user/refresh.php")
     suspend fun refreshToken(
