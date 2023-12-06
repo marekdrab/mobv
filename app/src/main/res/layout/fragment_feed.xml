@@ -16,6 +16,22 @@
         android:layout_marginBottom="12dp"
         tools:context=".fragments.IntroFragment">
 
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:text="@string/location_sharing"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+         />
+
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/pullRefresh"
             android:layout_width="match_parent"

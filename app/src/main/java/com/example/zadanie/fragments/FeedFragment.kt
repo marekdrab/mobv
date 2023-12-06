@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zadanie.adapters.FeedAdapter
 import com.example.zadanie.R
 import com.example.zadanie.api.DataRepository
+import com.example.zadanie.data.PreferenceData
 import com.example.zadanie.database.entities.UserEntity
 import com.example.zadanie.viewModels.FeedViewModel
 import com.example.zadanie.widgets.BottomBar
 import com.example.zadanie.databinding.FragmentFeedBinding
+import com.google.android.material.snackbar.Snackbar
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
     private lateinit var viewModel: FeedViewModel
-    private var binding: FragmentFeedBinding? = null
+    private lateinit var binding: FragmentFeedBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,25 +35,43 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
         binding = FragmentFeedBinding.bind(view).apply {
             lifecycleOwner = viewLifecycleOwner
-        }.also { bnd ->
-            bnd.bottomBar.setActive(BottomBar.FEED)
+        }
 
-            bnd.feedRecyclerview.layoutManager = LinearLayoutManager(context)
+        binding.apply {
+            bottomBar.setActive(BottomBar.FEED)
+        }
+
+        val isLocationSharingEnabled = PreferenceData.getInstance().getSharing(requireContext()).toString() == "true"
+
+        if (isLocationSharingEnabled) {
+            binding.feedRecyclerview.visibility = View.VISIBLE
+            binding.emptyView.visibility = View.GONE
+            setupRecyclerView()
+        } else {
+            binding.feedRecyclerview.visibility = View.GONE
+            binding.emptyView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding.apply {
+            bottomBar.setActive(BottomBar.FEED)
+
+            feedRecyclerview.layoutManager = LinearLayoutManager(context)
             val feedAdapter = FeedAdapter()
-            bnd.feedRecyclerview.adapter = feedAdapter
+            feedRecyclerview.adapter = feedAdapter
 
-            // Pozorovanie zmeny hodnoty
             viewModel.feed_items.observe(viewLifecycleOwner) { items ->
                 feedAdapter.updateItems(items ?: emptyList())
             }
 
-            bnd.pullRefresh.setOnRefreshListener {
+            pullRefresh.setOnRefreshListener {
                 viewModel.updateItems()
             }
             viewModel.loading.observe(viewLifecycleOwner) {
-                bnd.pullRefresh.isRefreshing = it
+                pullRefresh.isRefreshing = it
             }
-
         }
     }
+
 }

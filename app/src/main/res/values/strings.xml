@@ -31,4 +31,5 @@
     <string name="username">Login</string>
     <string name="insert_username">Zadajte login</string>
     <string name="registrate">Registruj sa</string>
+    <string name="location_sharing">Na zobrazenie zoznamu je potrebné povoliť získavanie polohy</string>
 </resources>
